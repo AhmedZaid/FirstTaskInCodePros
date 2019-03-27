@@ -44,3 +44,9 @@ type TestClass() =
     [<Test>]
     member this.NegtiveNumberSeconndCase() =  
          (fun () ->  FirstTaskAtCodePros.add "//?\n1?2?-9" |> ignore) |> should (throwWithMessage "negatives not allowed -9")  typeof<System.InvalidOperationException>
+
+
+    [<Test>]
+    member this.RemoveNumbersinThousand() = 
+        let res = FirstTaskAtCodePros.add "//?\n1?5?1001"
+        Assert.AreEqual(res, 6 )   

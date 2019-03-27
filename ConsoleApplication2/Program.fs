@@ -1,6 +1,18 @@
 ﻿module FirstTaskAtCodePros
+
+//Function that Remove any number >=1000  depending on number of digits
+let  RemoveLargeNumber (numbers: string [] ) : string [] =
+    let fourdigitnumbers =  numbers |> Array.filter (fun x -> x.Length > 3)
+    // Change arrays to sets then subtract them and return the final array
+    let orignalSet = set numbers
+    let fourdigitset = set fourdigitnumbers
+    let finalset = orignalSet - fourdigitset
+    let finalnmbers = finalset |> Array.ofSeq
+    finalnmbers
+//Function that raise excpetion if there is negtive number    
 let  negtiveNumber (numbers: string [] ) : int =
     let returncode=0
+    // Filter the array and find all string contain negtie sign
     let negtivenumber = numbers |> Array.filter (fun x -> x.Contains("-"))
     if negtivenumber.Length = 0 then
         returncode
@@ -34,7 +46,8 @@ let add (inputString: string ) : int =
             let numbers = datastring.Split(del)
             // this will throw expection if it  find negtive number otherwise it will continue
             let flag = negtiveNumber numbers
-            let summtion  = Array.sumBy int  numbers
+            let filteredNumber = RemoveLargeNumber numbers
+            let summtion  = Array.sumBy int  filteredNumber
             summtion
         with
         | Failure(msg) -> printfn "%s" msg; 0;
