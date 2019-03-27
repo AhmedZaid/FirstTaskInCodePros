@@ -30,3 +30,8 @@ type TestClass() =
     member this.NewLineDelimeter() = 
         let res = FirstTaskAtCodePros.add "9\n4,7"
         Assert.AreEqual(res, 20)
+
+    [<Test>]
+    member this.UserDelimeter() = 
+        let res = FirstTaskAtCodePros.add "//?\n1?2"
+        Assert.AreEqual(res, 3 )
