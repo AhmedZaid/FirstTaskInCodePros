@@ -1,4 +1,14 @@
 ﻿module FirstTaskAtCodePros
+let  negtiveNumber (numbers: string [] ) : int =
+    let returncode=0
+    let negtivenumber = numbers |> Array.filter (fun x -> x.Contains("-"))
+    if negtivenumber.Length = 0 then
+        returncode
+    else
+         let allNegtiveString = negtivenumber |> String.concat ", "
+         let errorMeesage= "negatives not allowed " + allNegtiveString
+         raise (System.InvalidOperationException(errorMeesage))
+         
 let add (inputString: string ) : int =
     let zero =0
     // add \n as delmeter 
@@ -18,10 +28,16 @@ let add (inputString: string ) : int =
             let newdel = firstline.Replace("//","")
             del <- [|newdel.[0]|]
             datastring <- splitOnNewLine.[1]
-        // Split depend on the array of delmeters then find the sum of there element    
-        let numbers = datastring.Split(del)
-        let summtion  = Array.sumBy int  numbers
-        summtion
+        // Call  a  function that should throw expection if there is a negtive number and surounded it by {try  with} module -Like Try and Catch in Java-
+        try
+            // Split depend on the array of delmeters then find the sum of there element
+            let numbers = datastring.Split(del)
+            // this will throw expection if it  find negtive number otherwise it will continue
+            let flag = negtiveNumber numbers
+            let summtion  = Array.sumBy int  numbers
+            summtion
+        with
+        | Failure(msg) -> printfn "%s" msg; 0;
         
       
         

@@ -2,6 +2,7 @@ module ConsoleApplication2.UnitTest
 
 open System
 open NUnit.Framework
+open FsUnit
 
 [<TestFixture>]
 type TestClass() = 
@@ -35,3 +36,11 @@ type TestClass() =
     member this.UserDelimeter() = 
         let res = FirstTaskAtCodePros.add "//?\n1?2"
         Assert.AreEqual(res, 3 )
+
+    [<Test>]
+    member this.NegtiveNumber() =  
+         (fun () ->  FirstTaskAtCodePros.add "2,-5,3,-4" |> ignore) |> should (throwWithMessage "negatives not allowed -5, -4")  typeof<System.InvalidOperationException>
+      
+    [<Test>]
+    member this.NegtiveNumberSeconndCase() =  
+         (fun () ->  FirstTaskAtCodePros.add "//?\n1?2?-9" |> ignore) |> should (throwWithMessage "negatives not allowed -9")  typeof<System.InvalidOperationException>
