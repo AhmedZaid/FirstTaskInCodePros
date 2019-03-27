@@ -20,3 +20,8 @@ type TestClass() =
     member this.SimpleTwoArgument() = 
         let res = FirstTaskAtCodePros.add "2,5"
         Assert.AreEqual(res, 7)
+        
+    [<Test>]
+    member this.UnlimtedArgument() = 
+        let res = FirstTaskAtCodePros.add "2,5,13,4"
+        Assert.AreEqual(res, 24)
