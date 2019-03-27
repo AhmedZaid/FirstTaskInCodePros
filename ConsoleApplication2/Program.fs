@@ -1,7 +1,8 @@
 ﻿module FirstTaskAtCodePros
 let add (inputString: string ) : int =
     let zero =0
-    let del = ','
+    // add \n as delmeter 
+    let del = [|',';'\n'|]
     // If the input is empty return zero
     if  inputString.Equals("") then
         zero

@@ -25,3 +25,8 @@ type TestClass() =
     member this.UnlimtedArgument() = 
         let res = FirstTaskAtCodePros.add "2,5,13,4"
         Assert.AreEqual(res, 24)
+
+    [<Test>]
+    member this.NewLineDelimeter() = 
+        let res = FirstTaskAtCodePros.add "9\n4,7"
+        Assert.AreEqual(res, 20)
