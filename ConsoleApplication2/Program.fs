@@ -24,7 +24,7 @@ let  negtiveNumber (numbers: string [] ) : int =
 let add (inputString: string ) : int =
     let zero =0
     // add \n as delmeter 
-    let mutable del = [|',';'\n'|]
+    let mutable del = [|",";"\n"|]
     // If the input is empty return zero
     if  inputString.Equals("") then
         zero
@@ -38,12 +38,24 @@ let add (inputString: string ) : int =
             let firstline  = splitOnNewLine.[0]
             // Remove // and add the new delimeter to delimeter array
             let newdel = firstline.Replace("//","")
-            del <- [|newdel.[0]|]
+            //Take first list of data  split  it depinding on []
+            let firstlinedata  = newdel.Split([| '[' ; ']'|])
+            // Add the new delemeter to the the list of delimeters using sets and plus operation
+            let orignalSet = set del
+            let firstlinedataset = set firstlinedata
+            let setofDel = orignalSet + firstlinedataset
+            // Convert the delmetiers from set  to Array
+            del <- setofDel |> Array.ofSeq
+            // Remove Empty string in delemters
+            del <- del |> Array.filter (fun x ->  not (x.Equals("")))
             datastring <- splitOnNewLine.[1]
+        //Replace all delimeters with single comma
+        for i in del do
+            datastring <- datastring.Replace(i,",")
         // Call  a  function that should throw expection if there is a negtive number and surounded it by {try  with} module -Like Try and Catch in Java-
         try
-            // Split depend on the array of delmeters then find the sum of there element
-            let numbers = datastring.Split(del)
+            // Split depend on comma  then find the sum of there element
+            let numbers = datastring.Split([|','|])
             // this will throw expection if it  find negtive number otherwise it will continue
             let flag = negtiveNumber numbers
             let filteredNumber = RemoveLargeNumber numbers

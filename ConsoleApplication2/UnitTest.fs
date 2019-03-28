@@ -49,4 +49,20 @@ type TestClass() =
     [<Test>]
     member this.RemoveNumbersinThousand() = 
         let res = FirstTaskAtCodePros.add "//?\n1?5?1001"
-        Assert.AreEqual(res, 6 )   
+        Assert.AreEqual(res, 6 )
+        
+    [<Test>]
+    member this.StringDelmetier() = 
+        let res = FirstTaskAtCodePros.add "//[>>>]\n1>>>7>>>1001"
+        Assert.AreEqual(res, 8 )
+
+    [<Test>]
+    member this.CharMultiDelmetier() = 
+        let res = FirstTaskAtCodePros.add "//[*][;]\n1;2*100"
+        Assert.AreEqual(res, 103)
+        
+    [<Test>]
+    member this.StringMultiDelmetier() = 
+        let res = FirstTaskAtCodePros.add "//[>>>][\\]\n123>>>7\10"
+        Assert.AreEqual(res, 140 )
+    
